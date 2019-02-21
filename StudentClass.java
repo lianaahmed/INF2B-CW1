@@ -13,7 +13,25 @@ public class StudentClass {
 	}
 	
 	public static int[] computePrefixFunction(String pattern) {
-		// Please add your code here.
+		
+		int m = pattern.length(); 
+		int k = 0;
+		
+		int[] pi = new int[m];
+		
+		pi[0] = 0;
+		
+		for(int q = 1; q < m; q++) {
+			
+			while((k > 0) && (pattern.charAt(k) != pattern.charAt(q))) {
+				k = pi[k - 1];
+			}
+			if (pattern.charAt(k) == pattern.charAt(q)) {
+				k++;
+			}
+			pi[q] = k;
+		}
+		return pi;
 	}
 
 
@@ -52,7 +70,26 @@ public class StudentClass {
 		}
 
 		public void search() {
-			// Please add your code here.
+			
+			prefixFunction = computePrefixFunction(pattern);
+			int q = 0;
+			
+			for (int i = 0; i < textLen; i++) {
+				
+				while ((q > 0) && (pattern.charAt(q) != text.charAt(i))) {
+					q = prefixFunction[q];
+				}
+				
+				if (pattern.charAt(q) == text.charAt(i)) {
+					q++;
+				}
+				
+				if (q == patternLen) {
+					matchIndices.enqueue(i - patternLen);
+					q = prefixFunction[q];
+				}
+			}
 		}
+
 	}
 }
