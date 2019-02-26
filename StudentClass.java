@@ -12,26 +12,36 @@ public class StudentClass {
 		kmpMatcher.setPrefixFunction(computePrefixFunction(kmpMatcher.getPattern()));
 	}
 	
+	public static void main(String[] args) {
+		
+		//Matcher.getRuntimes(10, 100, "matcherTimes.txt"); // Q2
+		//Matcher.getRatios(10, 100, 50000, "matcherRatios.txt"); // Q3
+		
+		 Matcher.plotRuntimes(0.015060, 0.009816, "matcherTimes.txt"); // Q3	
+		
+		
+	}
+	
 	public static int[] computePrefixFunction(String pattern) {
 		
-		int m = pattern.length(); 
-		int k = 0;
+		int m = pattern.length(); // m <- P.length
+		int k = 0; // k <- 0
 		
 		int[] pi = new int[m];
 		
-		pi[0] = 0;
+		pi[0] = 0; // p[1] <- 0
 		
-		for(int q = 1; q < m; q++) {
+		for(int q = 1; q < m; q++) { // for q <- 2 to m do
 			
-			while((k > 0) && (pattern.charAt(k) != pattern.charAt(q))) {
-				k = pi[k - 1];
+			while((k > 0) && (pattern.charAt(k) != pattern.charAt(q))) { // while k > 0 and P[k + 1] != P[q] 
+				k = pi[k - 1]; // do k <- pi[k]
 			}
-			if (pattern.charAt(k) == pattern.charAt(q)) {
-				k++;
+			if (pattern.charAt(k) == pattern.charAt(q)) { // if P[k + 1] = P[q] then  
+				k++; //k <- k + 1
 			}
-			pi[q] = k;
+			pi[q] = k; // pi[q] <- k
 		}
-		return pi;
+		return pi; // return 
 	}
 
 
@@ -68,28 +78,28 @@ public class StudentClass {
 		public Queue getMatchIndices() {
 			return matchIndices;
 		}
-
+		
+		// KMP Matcher
 		public void search() {
 			
-			prefixFunction = computePrefixFunction(pattern);
-			int q = 0;
+			prefixFunction = computePrefixFunction(pattern); // pi <- Compute-Prefix-Function(P)
+			int q = 0; // q <- 0
 			
-			for (int i = 0; i < textLen; i++) {
+			for (int i = 1; i < textLen; i++) { // for i <- 1 to n do
 				
-				while ((q > 0) && (pattern.charAt(q) != text.charAt(i))) {
-					q = prefixFunction[q];
+				while ((q > 0) && (pattern.charAt(q) != text.charAt(i-1))) { // while q > 0 and P[q+1] != T[i]
+					q = prefixFunction[q-1]; // do q <- pi[q]
 				}
 				
-				if (pattern.charAt(q) == text.charAt(i)) {
-					q++;
+				if (pattern.charAt(q) == text.charAt(i-1)) { // if P[q + 1] = T[i] then
+					q++; // q <- q + 1
 				}
 				
-				if (q == patternLen) {
-					matchIndices.enqueue(i - patternLen);
-					q = prefixFunction[q];
+				if (q == patternLen) { // if q = m then 
+					matchIndices.enqueue(i - patternLen); // enqueue(Q, i - m)
+					q = prefixFunction[q-1]; // q <- pi[q]
 				}
 			}
 		}
-
 	}
 }
