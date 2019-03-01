@@ -85,6 +85,10 @@ public class StudentClass {
 			prefixFunction = computePrefixFunction(pattern); // pi <- Compute-Prefix-Function(P)
 			int q = 0; // q <- 0
 			
+			if (m > n){
+				matchIndices = new Queue();
+			}
+			
 			for (int i = 1; i < textLen; i++) { // for i <- 1 to n do
 				
 				while ((q > 0) && (pattern.charAt(q) != text.charAt(i-1))) { // while q > 0 and P[q+1] != T[i]
