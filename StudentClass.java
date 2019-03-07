@@ -14,13 +14,16 @@ public class StudentClass {
 	
 	public static void main(String[] args) {
 		
-		//Matcher.getRuntimes(10, 100, "matcherTimes.txt"); // Q2
-		//Matcher.getRatios(10, 100, 50000, "matcherRatios.txt"); // Q3
+		Matcher.getRuntimes(10, 100, "matcherTimes.txt"); // Q2
+		Matcher.getRatios(10, 100, 50000, "matcherRatios.txt"); // Q3
 		
-		 Matcher.plotRuntimes(0.015060, 0.009816, "matcherTimes.txt"); // Q3	
+		Matcher.plotRuntimes(0.015060, 0.009816, "matcherTimes.txt"); // Q3	
 		
 		
 	}
+	
+	
+	// For each line of function, I placed the equivalent line of pseudo-code next as the comments
 	
 	public static int[] computePrefixFunction(String pattern) {
 		
@@ -41,7 +44,7 @@ public class StudentClass {
 			}
 			pi[q] = k; // pi[q] <- k
 		}
-		return pi; // return 
+		return pi; // return pi
 	}
 
 
