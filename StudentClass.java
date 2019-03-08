@@ -14,10 +14,10 @@ public class StudentClass {
 	
 	public static void main(String[] args) {
 		
-		Matcher.getRuntimes(10, 100, "matcherTimes.txt"); // Q2
-		Matcher.getRatios(10, 100, 50000, "matcherRatios.txt"); // Q3
+		//Matcher.getRuntimes(10, 100, "matcherTimes.txt"); // Q2
+		//Matcher.getRatios(10, 100, 50000, "matcherRatios.txt"); // Q3
 		
-		Matcher.plotRuntimes(0.015060, 0.009816, "matcherTimes.txt"); // Q3	
+		 Matcher.plotRuntimes(0.015060, 0.009816, "matcherTimes.txt"); // Q3	
 		
 		
 	}
@@ -88,10 +88,10 @@ public class StudentClass {
 			prefixFunction = computePrefixFunction(pattern); // pi <- Compute-Prefix-Function(P)
 			int q = 0; // q <- 0
 			
-			if (m > n){
+			if(patternLen > textLen) {
 				matchIndices = new Queue();
 			}
-
+			
 			for (int i = 1; i < textLen; i++) { // for i <- 1 to n do
 				
 				while ((q > 0) && (pattern.charAt(q) != text.charAt(i-1))) { // while q > 0 and P[q+1] != T[i]
