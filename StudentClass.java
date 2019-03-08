@@ -88,6 +88,7 @@ public class StudentClass {
 			prefixFunction = computePrefixFunction(pattern); // pi <- Compute-Prefix-Function(P)
 			int q = 0; // q <- 0
 			
+
 			if(patternLen > textLen) {
 				matchIndices = new Queue();
 			}
