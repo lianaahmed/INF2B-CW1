@@ -88,26 +88,28 @@ public class StudentClass {
 			prefixFunction = computePrefixFunction(pattern); // pi <- Compute-Prefix-Function(P)
 			int q = 0; // q <- 0
 			
-
+			// Only run KMP matcher if pattern length <= textLength. Otherwise, return a new queue.
 			if(patternLen > textLen) {
 				matchIndices = new Queue();
 			}
-			
-			for (int i = 1; i < textLen; i++) { // for i <- 1 to n do
+			else{
+				for (int i = 1; i < textLen; i++) { // for i <- 1 to n do
 				
-				while ((q > 0) && (pattern.charAt(q) != text.charAt(i-1))) { // while q > 0 and P[q+1] != T[i]
-					q = prefixFunction[q-1]; // do q <- pi[q]
-				}
-				
-				if (pattern.charAt(q) == text.charAt(i-1)) { // if P[q + 1] = T[i] then
-					q++; // q <- q + 1
-				}
-				
-				if (q == patternLen) { // if q = m then 
-					matchIndices.enqueue(i - patternLen); // enqueue(Q, i - m)
-					q = prefixFunction[q-1]; // q <- pi[q]
+					while ((q > 0) && (pattern.charAt(q) != text.charAt(i-1))) { // while q > 0 and P[q+1] != T[i]
+						q = prefixFunction[q-1]; // do q <- pi[q]
+					}
+					
+					if (pattern.charAt(q) == text.charAt(i-1)) { // if P[q + 1] = T[i] then
+						q++; // q <- q + 1
+					}
+					
+					if (q == patternLen) { // if q = m then 
+						matchIndices.enqueue(i - patternLen); // enqueue(Q, i - m)
+						q = prefixFunction[q-1]; // q <- pi[q]
+					}
 				}
 			}
+			
 		}
 	}
 }
